@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>多变量数值计算引擎与二维空间最优解模拟器</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>多变量数值计算引擎 &amp; 二维空间最优解模拟器</h1>
+      <p class="subtitle">Discrete Constrained Optimization · 2D Response Surface · Real-Time Sensitivity Analytics</p>
+    </div>
+    <div class="badge-group">
+      <span class="badge">Pure HTML/JS Engine</span>
+      <span class="badge accent">Exact Discrete Solver</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <h2>1. 情景模型与多维参数配置</h2>
+
+      <label class="field">
+        <span>优化情景预设（Scenario Preset）</span>
+        <select id="scenarioSelect">
+          <option value="portfolio">金融资产离散仓位效用最大化（均值-方差-交易成本）</option>
+          <option value="production">复杂离散条件多要素产出与边际利润最优化</option>
+          <option value="grid">量化网格交易参数二维寻优（步长 × 仓位档位）</option>
+        </select>
+      </label>
+
+      <div class="control-grid">
+        <label class="field">
+          <span>预算 / 资源上限 B：<strong id="valBudget">100</strong></span>
+          <input type="range" id="paramBudget" min="40" max="200" step="5" value="100" />
+        </label>
+
+        <label class="field">
+          <span>离散步长 Δ（Grid Step）：<strong id="valStep">2</strong></span>
+          <input type="range" id="paramStep" min="1" max="10" step="1" value="2" />
+        </label>
+
+        <label class="field">
+          <span>风险厌恶 / 惩罚系数 λ：<strong id="valLambda">1.8</strong></span>
+          <input type="range" id="paramLambda" min="0.2" max="5.0" step="0.2" value="1.8" />
+        </label>
+
+        <label class="field">
+          <span>协同 / 相关性因子 ρ：<strong id="valRho">0.25</strong></span>
+          <input type="range" id="paramRho" min="-0.60" max="0.80" step="0.05" value="0.25" />
+        </label>
+
+        <label class="field">
+          <span>变量 X 单位成本 c₁：<strong id="valC1">1.2</strong></span>
+          <input type="range" id="paramC1" min="0.5" max="3.0" step="0.1" value="1.2" />
+        </label>
+
+        <label class="field">
+          <span>变量 Y 单位成本 c₂：<strong id="valC2">1.0</strong></span>
+          <input type="range" id="paramC2" min="0.5" max="3.0" step="0.1" value="1.0" />
+        </label>
+      </div>
+
+      <div class="formula-box" id="formulaBox"></div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">全局最优目标值 f(x*, y*)</div>
+          <div class="kpi-value" id="optVal">--</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">最优离散组合 (x*, y*)</div>
+          <div class="kpi-value" id="optXY">--</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">可行解空间评估点数</div>
+          <div class="kpi-value" id="feasibleCount">--</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">预算利用率 / 局部梯度</div>
+          <div class="kpi-value small" id="optMeta">--</div>
+        </div>
+      </div>
+
+      <h3>Top-5 离散最优候选解</h3>
+      <table class="rank-table">
+        <thead>
+          <tr>
+            <th>排名</th>
+            <th>X 值</th>
+            <th>Y 值</th>
+            <th>资源消耗</th>
+            <th>目标函数值</th>
+            <th>距最优差值</th>
+          </tr>
+        </thead>
+        <tbody id="topTableBody"></tbody>
+      </table>
+    </section>
+
+    <section class="panel viewport">
+      <div class="viewport-header">
+        <h2>2. 二维决策空间目标函数热力图与可行域边界</h2>
+        <span class="hint">移动鼠标至画布可实时探测任意 (x, y) 的目标函数值与约束状态</span>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="surfaceCanvas" width="640" height="520"></canvas>
+      </div>
+      <div class="probe-bar" id="probeBar">鼠标悬停在二维决策空间上以查看精确数值探测结果...</div>
+    </section>
+  </main>
+
+  <script src="optimizer.js"></script>
+</body>
+</html>
