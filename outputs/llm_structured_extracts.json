@@ -1,0 +1,38 @@
+[
+  {
+    "doc_id": "FILING-2026Q3-01",
+    "entity": "华泰证券（示例研报摘要）",
+    "period": "2026Q3",
+    "revenue_bn_rmb": 298.6,
+    "revenue_yoy_pct": 12.4,
+    "net_profit_bn_rmb": 118.2,
+    "sentiment": "Positive",
+    "key_catalyst": "机构衍生品与财富管理手续费收入双增",
+    "risk_flag": "权益市场波动对自营公允价值变动存在影响",
+    "provider": "offline-schema-parser"
+  },
+  {
+    "doc_id": "FILING-2026Q3-02",
+    "entity": "南京银行（示例财报快讯）",
+    "period": "2026Q3",
+    "revenue_bn_rmb": 392.4,
+    "revenue_yoy_pct": 8.9,
+    "net_profit_bn_rmb": 169.5,
+    "sentiment": "Positive",
+    "key_catalyst": "长三角对公科创信贷扩张与低不良率韧性",
+    "risk_flag": "LPR 调降周期下净息差（NIM）持续承压",
+    "provider": "offline-schema-parser"
+  },
+  {
+    "doc_id": "FILING-2026Q3-03",
+    "entity": "某有色再生铝龙头（示例公告）",
+    "period": "2026Q3",
+    "revenue_bn_rmb": 146.8,
+    "revenue_yoy_pct": 5.2,
+    "net_profit_bn_rmb": 9.4,
+    "sentiment": "Neutral",
+    "key_catalyst": "新能源车一体化压铸铝合金订单放量",
+    "risk_flag": "废铝原料采购价波动及期货套保基差风险",
+    "provider": "offline-schema-parser"
+  }
+]
